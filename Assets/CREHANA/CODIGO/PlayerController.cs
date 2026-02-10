@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerController : MonoBehaviour
 {
+
+
+    public InputMode currentInputMode = InputMode.Keyboard;
+
     [Header("Configuración de Movimiento")]
     [Tooltip("Velocidad de movimiento del personaje")]
     public float velocidadMovimiento = 5f;
@@ -62,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private Collider personajeCollider;
     private float velocidadInicialSalto;
 
+
     // Nombres de parámetros del Animator
     private const string ANIM_CORRIENDO = "Corriendo";
     private const string ANIM_CAYENDO = "Cayendo";
@@ -80,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
         // Obtener el collider del personaje
         personajeCollider = GetComponent<Collider>();
+
 
         // Si no se asignó el Animator, intentar obtenerlo
         if (animator == null)
@@ -150,11 +157,18 @@ public class PlayerController : MonoBehaviour
         velocidadInicialSalto = (2f * alturaSalto) / tiempoSubida;
     }
 
-    void ObtenerInput()
+    #region INPUT
+    /*void ObtenerInput()
     {
         // Obtener input de movimiento desde el nuevo Input System
         inputMovimiento = Vector2.zero;
-        
+
+        //TOUCH MOVE INPUT 
+        if (playerTouchMovement != null && playerTouchMovement.touchActive)
+        {
+            inputMovimiento = playerTouchMovement.movementAmount;
+        }
+
         // Keyboard (WASD y Flechas)
         if (Keyboard.current != null)
         {
@@ -178,13 +192,24 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    
+
         // Crear vector de dirección (en el plano XZ)
         direccionMovimiento = new Vector3(inputMovimiento.x, 0f, inputMovimiento.y).normalized;
+
+
 
         // Obtener input de salto
         inputSalto = false;
         inputSaltoMantiene = false;
-        
+
+
+        //TOUCH BUTTON INPUT 
+        if (playerTouchMovement != null && DeviceDetector.isMobileWebGl)
+        {
+            inputSalto = playerTouchMovement.IsJumpButtonPressed();
+        }
+
         if (Keyboard.current != null)
         {
             inputSalto = Keyboard.current.spaceKey.wasPressedThisFrame;
@@ -197,7 +222,37 @@ public class PlayerController : MonoBehaviour
             inputSalto = inputSalto || Gamepad.current.buttonSouth.wasPressedThisFrame;
             inputSaltoMantiene = inputSaltoMantiene || Gamepad.current.buttonSouth.isPressed;
         }
+
+    
+    }*/
+    void ObtenerInput()
+    {
+
+        PlayerInputData input = InputManager.Instance.CurrentInput;
+
+        Move(input.movement);
+        inputSalto = input.jumpPressed;
+       
+        //touchUI.SetActive(DeviceDetector.isMobileWebGl && currentInputMode == InputMode.Touch);
     }
+
+    void Move(Vector2 move)
+    {
+        direccionMovimiento = new Vector3(
+           move.x,
+           0f,
+           move.y
+       ).normalized;
+    }
+
+    void Jump()
+    {
+        inputSalto = true;
+    }
+
+
+    #endregion
+
 
     void MoverPersonaje()
     {
@@ -394,4 +449,6 @@ public class PlayerController : MonoBehaviour
         }
         return string.IsNullOrEmpty(result) ? "NINGUNO" : result;
     }
+
+    
 }

@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/CREHANA/ESCENAS/00_HOME.unity
     guid: 61581458293cecb4695484fab3f6ee84
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/Registro.unity
+    guid: a69b88c8ef5d508498fbd241ba088c46
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/01_LOBBY.unity
     guid: 99c9720ab356a0642a771bea13969a05
