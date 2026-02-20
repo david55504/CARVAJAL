@@ -29,6 +29,12 @@ public class DialogueSystem : MonoBehaviour
     [Range(0f, 5f)]
     public float pausaEntreDialogos = 1f;
 
+    [Tooltip("Ajuste global de tiempo (en segundos) que se suma a la duración del audio para calcular la velocidad de escritura. " +
+             "Negativo = el texto termina ANTES que el audio. Positivo = el texto termina DESPUÉS. " +
+             "Se aplica a todos los diálogos; úsalo como corrección general de desfase.")]
+    [Range(-5f, 5f)]
+    public float ajusteGlobalTiempo = 0f;
+
     // Variables privadas
     private int indiceDialogoActual = 0;
     private bool esperandoBotonContinuar = false;
@@ -120,7 +126,9 @@ public class DialogueSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Escribe el diálogo letra por letra sincronizado con el audio
+    /// Escribe el diálogo letra por letra sincronizado con el audio.
+    /// La duración efectiva se calcula como:
+    ///   duracionAudio + ajusteGlobalTiempo + dialogo.ajusteIndividualTiempo
     /// </summary>
     IEnumerator EscribirDialogo(Dialogo dialogo)
     {
@@ -143,14 +151,28 @@ public class DialogueSystem : MonoBehaviour
             yield break;
         }
 
-        // Calcular tiempo entre caracteres para que termine con el audio
-        float tiempoEntreCar = duracionAudio / dialogo.texto.Length;
+        // Duración efectiva: audio real + ajuste global + ajuste individual del diálogo
+        // Un valor negativo adelanta el texto; uno positivo lo retrasa.
+        float duracionEfectiva = duracionAudio + ajusteGlobalTiempo + dialogo.ajusteIndividualTiempo;
+
+        // Protección: garantizar un mínimo para evitar velocidades absurdas
+        duracionEfectiva = Mathf.Max(duracionEfectiva, 0.1f);
+
+        // Calcular tiempo entre caracteres para que la escritura termine en duracionEfectiva
+        float tiempoEntreCar = duracionEfectiva / dialogo.texto.Length;
 
         // Escribir letra por letra
         foreach (char letra in dialogo.texto)
         {
             textoDialogo.text += letra;
             yield return new WaitForSeconds(tiempoEntreCar);
+        }
+
+        // Esperar a que el audio termine completamente antes de avanzar,
+        // independientemente de si el texto terminó antes o después.
+        while (audioSource.isPlaying)
+        {
+            yield return null;
         }
 
         // Verificar si requiere botón de continuar
@@ -301,4 +323,10 @@ public class Dialogo
 
     [Tooltip("¿Requiere que el usuario presione 'Continuar' para avanzar?")]
     public bool requiereBotonContinuar = false;
+
+    [Tooltip("Ajuste individual de tiempo (en segundos) que se suma a la duración del audio SOLO para este diálogo. " +
+             "Negativo = el texto termina ANTES que el audio (útil si el audio tiene silencio al final). " +
+             "Positivo = el texto termina DESPUÉS. Se acumula con el ajuste global del sistema.")]
+    [Range(-5f, 5f)]
+    public float ajusteIndividualTiempo = 0f;
 }

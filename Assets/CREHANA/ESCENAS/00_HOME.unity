@@ -624,7 +624,7 @@ RectTransform:
   m_GameObject: {fileID: 708382864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.300939, y: 2.300939, z: 2.300939}
+  m_LocalScale: {x: 2.043349, y: 2.043349, z: 2.043349}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1803341739}
@@ -633,7 +633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.06864706}
   m_AnchorMax: {x: 0.5, y: 0.06864706}
-  m_AnchoredPosition: {x: -9.999893, y: 65}
+  m_AnchoredPosition: {x: -9.999893, y: 39}
   m_SizeDelta: {x: 266.1738, y: 317.2207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708382866
@@ -1077,7 +1077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.40384007, y: 4.442871}
+  m_AnchoredPosition: {x: 0.40384007, y: 15}
   m_SizeDelta: {x: 181.5, y: 189.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606957464
@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 1803341741}
   - component: {fileID: 1803341740}
   - component: {fileID: 1803341743}
+  - component: {fileID: 1803341744}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1155,7 +1156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 93}
+  m_AnchoredPosition: {x: 0.000011444, y: 99}
   m_SizeDelta: {x: 196.2867, y: 87.7841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1803341740
@@ -1252,9 +1253,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c17e6778217fb42b15bd72a220dd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotonCambiarEscena
-  nombreEscena: 01_LOBBY
+  nombreEscena: 00_Registro
   mostrarDebug: 0
   delayAntesDeCambiar: 0
+--- !u!114 &1803341744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803341738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f378502f90a27c46a2cd2d0e92a6666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OscilacionEscala
+  velocidad: 2
+  exageracion: 1.26
+  rangoX: 0.05
+  rangoY: 0.05
+  rangoZ: 0.05
+  oscilarX: 1
+  oscilarY: 1
+  oscilarZ: 1
 --- !u!1 &2008557018
 GameObject:
   m_ObjectHideFlags: 0
