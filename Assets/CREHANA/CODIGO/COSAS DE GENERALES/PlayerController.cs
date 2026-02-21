@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
@@ -110,7 +111,6 @@ public class PlayerController : MonoBehaviour
         ObtenerInput();
         DetectarSuelo();
         ManejarSalto();
-        RotarPersonaje();
         ActualizarAnimaciones();
 
         if (mostrarDebug && Time.frameCount % 60 == 0)
@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         MoverPersonaje();
+        RotarPersonaje();
         AplicarGravedad();
     }
 
@@ -139,7 +140,12 @@ public class PlayerController : MonoBehaviour
 
     void Move(Vector2 move)
     {
-        direccionMovimiento = new Vector3(move.x, 0f, move.y).normalized;
+        Vector3 dir = new Vector3(move.x, 0f, move.y);
+
+        if (dir.sqrMagnitude > 1f)
+            dir.Normalize();
+
+        direccionMovimiento = dir;
     }
 
     void Jump()
@@ -232,12 +238,14 @@ public class PlayerController : MonoBehaviour
 
     void RotarPersonaje()
     {
+       
         if (direccionMovimiento.magnitude > 0.1f)
         {
             // Forzamos Y=0 y normalizamos explícitamente antes de pasarlo a LookRotation.
             // En WebGL los floats de 32 bits pueden acumular un residuo en Y que hace que
             // LookRotation devuelva un quaternion inclinado, limitando la rotación horizontal.
             Vector3 dirPlana = new Vector3(direccionMovimiento.x, 0f, direccionMovimiento.z).normalized;
+
 
             Quaternion rotacionObjetivo = Quaternion.LookRotation(dirPlana, Vector3.up);
 
