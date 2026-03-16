@@ -143,7 +143,7 @@ MonoBehaviour:
   m_text: Entendido
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6cedef41fe5df247a9d0c0ccbf65201, type: 2}
-  m_sharedMaterial: {fileID: -5926341273520136821, guid: e6cedef41fe5df247a9d0c0ccbf65201, type: 2}
+  m_sharedMaterial: {fileID: 2495262799827505417, guid: e6cedef41fe5df247a9d0c0ccbf65201, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -311,7 +311,9 @@ MonoBehaviour:
       en seguridad."
     audioClip: {fileID: 8300000, guid: e2d9f07a7bef0964bb906c5b0d7b05dc, type: 3}
     requiereBotonContinuar: 0
+    ajusteIndividualTiempo: 0
   pausaEntreDialogos: 1.5
+  ajusteGlobalTiempo: 0
 --- !u!1 &8579248296139191644
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Gestiona el conteo de objetivos del jugador mediante triggers.
@@ -17,6 +18,16 @@ public class ObjetivosManager : MonoBehaviour
              "Si es menor o igual a 0, se usará el total de objetivos en la lista.")]
     [Min(0)]
     public int minimoObjetivosRequeridos = 0;
+
+    [Header("Puntuación")]
+    [Tooltip("Texto del canvas donde se mostrará el puntaje actual.")]
+    public TextMeshProUGUI textoPuntuacion;
+
+    [Tooltip("Puntos que se suman cada vez que el jugador atraviesa un trigger de la lista.")]
+    public int puntosPorObjetivo = 10;
+
+    [Tooltip("Velocidad a la que suben los números en pantalla (puntos por segundo). Ej: 200 = tarda 1.5s en subir 300 puntos.")]
+    public float velocidadAnimacionPuntos = 200f;
 
     [Header("Elementos de Victoria")]
     [Tooltip("GameObjects que se ACTIVARÁN cuando se cumpla la meta (ej: panel de victoria, botones, etc.)")]
@@ -38,6 +49,8 @@ public class ObjetivosManager : MonoBehaviour
     private int objetivosCompletados = 0;
     private bool metaCumplida = false;
     private int metaEfectiva = 0;
+    private int puntuacionActual = 0;
+    private float puntuacionMostrada = 0f;
 
     // Referencia interna para conectar cada trigger con este manager
     private List<TriggerObjetivo> componentesTrigger = new List<TriggerObjetivo>();
@@ -54,6 +67,9 @@ public class ObjetivosManager : MonoBehaviour
             if (elemento != null)
                 elemento.SetActive(false);
         }
+
+        // Inicializar el texto de puntuación
+        ActualizarTextoPuntuacion();
 
         // Inyectar el componente detector en cada objetivo
         foreach (GameObject obj in objetivos)
@@ -96,13 +112,51 @@ public class ObjetivosManager : MonoBehaviour
         if (metaCumplida) return;
 
         objetivosCompletados++;
-        Debug.Log($"🎯 Objetivo completado: '{objetivoCompletado.name}' | Progreso: {objetivosCompletados}/{metaEfectiva}");
+        puntuacionActual += puntosPorObjetivo;
+        ActualizarTextoPuntuacion();
+
+        Debug.Log($"🎯 Objetivo completado: '{objetivoCompletado.name}' | Progreso: {objetivosCompletados}/{metaEfectiva} | Puntos: {puntuacionActual}");
 
         if (objetivosCompletados >= metaEfectiva)
         {
             metaCumplida = true;
             StartCoroutine(EsperarYActivarVictoria());
         }
+    }
+
+    /// <summary>
+    /// Lanza la corrutina que anima el contador en pantalla hacia el valor objetivo.
+    /// Si ya hay una animación en curso, simplemente actualiza el objetivo y continúa desde donde va.
+    /// </summary>
+    private void ActualizarTextoPuntuacion()
+    {
+        StopCoroutine("AnimarPuntuacion");
+        StartCoroutine("AnimarPuntuacion");
+    }
+
+    /// <summary>
+    /// Incrementa el número visible en pantalla gradualmente hasta alcanzar puntuacionActual.
+    /// </summary>
+    System.Collections.IEnumerator AnimarPuntuacion()
+    {
+        while (puntuacionMostrada < puntuacionActual)
+        {
+            puntuacionMostrada = Mathf.MoveTowards(
+                puntuacionMostrada,
+                puntuacionActual,
+                velocidadAnimacionPuntos * Time.deltaTime
+            );
+
+            if (textoPuntuacion != null)
+                textoPuntuacion.text = Mathf.FloorToInt(puntuacionMostrada).ToString();
+
+            yield return null;
+        }
+
+        // Asegurarse de que el número final sea exacto
+        puntuacionMostrada = puntuacionActual;
+        if (textoPuntuacion != null)
+            textoPuntuacion.text = puntuacionActual.ToString();
     }
 
     /// <summary>
@@ -116,7 +170,7 @@ public class ObjetivosManager : MonoBehaviour
             yield return new WaitForSeconds(esperaAntesDeVictoria);
         }
 
-        Debug.Log($"🏆 ¡META CUMPLIDA! El jugador completó {objetivosCompletados} objetivos.");
+        Debug.Log($"🏆 ¡META CUMPLIDA! El jugador completó {objetivosCompletados} objetivos con {puntuacionActual} puntos.");
 
         foreach (GameObject elemento in elementosVictoria)
         {
@@ -126,12 +180,15 @@ public class ObjetivosManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Reinicia el contador y el estado de victoria.
+    /// Reinicia el contador, la puntuación y el estado de victoria.
     /// </summary>
     public void ReiniciarObjetivos()
     {
         objetivosCompletados = 0;
         metaCumplida = false;
+        puntuacionActual = 0;
+        puntuacionMostrada = 0f;
+        ActualizarTextoPuntuacion();
 
         // Desactivar elementos de victoria
         foreach (GameObject elemento in elementosVictoria)
@@ -164,6 +221,11 @@ public class ObjetivosManager : MonoBehaviour
     /// Indica si la meta ya fue cumplida.
     /// </summary>
     public bool MetaCumplida() => metaCumplida;
+
+    /// <summary>
+    /// Devuelve la puntuación actual del jugador.
+    /// </summary>
+    public int ObtenerPuntuacion() => puntuacionActual;
 }
 
 

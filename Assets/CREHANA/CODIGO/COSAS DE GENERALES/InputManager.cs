@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
 
     public PlayerInputData CurrentInput { get; private set; }
 
+    // Cuando está en true, CurrentInput devuelve valores vacíos (sin movimiento ni salto)
+    public bool InputBloqueado { get; set; }
+
     private PlayerInputActions actions;
     private Vector2 moveInput;
     private bool jumpPressed;
@@ -93,12 +96,25 @@ public class InputManager : MonoBehaviour
 
     void BuildInputData()
     {
-        CurrentInput = new PlayerInputData
+        if (InputBloqueado)
         {
-            movement = moveInput,
-            jumpPressed = jumpPressed,
-            jumpHeld = jumpHeld
-        };
+            // Input bloqueado: devolver valores vacíos para detener movimiento y salto
+            CurrentInput = new PlayerInputData
+            {
+                movement = Vector2.zero,
+                jumpPressed = false,
+                jumpHeld = false
+            };
+        }
+        else
+        {
+            CurrentInput = new PlayerInputData
+            {
+                movement = moveInput,
+                jumpPressed = jumpPressed,
+                jumpHeld = jumpHeld
+            };
+        }
 
         jumpPressed = false; // reset frame-based input
     }

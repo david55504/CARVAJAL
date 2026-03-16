@@ -6,17 +6,47 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CREHANA/ESCENAS/00_HOME.unity
+    path: Assets/CREHANA/ESCENAS/00_1_HOME.unity
     guid: 61581458293cecb4695484fab3f6ee84
   - enabled: 1
-    path: Assets/CREHANA/ESCENAS/00_Registro.unity
+    path: Assets/CREHANA/ESCENAS/00_2_Registro.unity
     guid: a69b88c8ef5d508498fbd241ba088c46
   - enabled: 1
-    path: Assets/CREHANA/ESCENAS/01_LOBBY.unity
+    path: Assets/CREHANA/ESCENAS/00_3_LOBBY.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/CREHANA/ESCENAS/02_NIVEL_RIESGOS.unity
+    path: Assets/CREHANA/ESCENAS/01_NIVEL_RIESGOS.unity
     guid: 610574f28e365814f8e7f05d43763139
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/02_NIVEL_NO_EXPONER_EL_CUERPO.unity
+    guid: c4f35adabd29e5c44a147e82dbe7f0e6
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/02_NIVEL_NO_EXPONER_EL_CUERPO 2.unity
+    guid: 457a42f2bad67f046917aa6b11bc95d6
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/03_NIVEL_ORGANIZAR.unity
+    guid: ba44e8b63b24cbf47b01f2119e25cd7d
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/04_NIVEL_COMPORTAMIENTOS.unity
+    guid: eaf72be5ad3ee234682242f74e3ea51c
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/05_NIVEL_FORMACION.unity
+    guid: 0fe1d15ba9a1ed8408b53bf3c4cebdd8
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/05_NIVEL_FORMACION 1.unity
+    guid: f17c89b9680f9ef4c9cda7163c5affad
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/06_NIVEL_PROSEDIMINETOS.unity
+    guid: b1677d86c09e6cb45b8a5c8ede3f87a0
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/07_NIVEL_IMPLEMENTOS_SEGURIDAD.unity
+    guid: b6b1fe79c12b9e34eab3942ff95f34a1
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/08_NIVEL_DISTRACTORES.unity
+    guid: 2bfcdef79f57b1143b3fa5d6ce8520dd
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/09_NIVEL_ACTIVIDADES_RIESGO.unity
+    guid: 4f07a8487c499994f95ee5828fba2082
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
