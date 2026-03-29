@@ -270,6 +270,59 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &518311880289322618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6382422797435576912}
+  - component: {fileID: 8354997962482651955}
+  m_Layer: 3
+  m_Name: Collider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6382422797435576912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518311880289322618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000012563581, y: -0.00000054314114, z: 0.7835697, w: 0.62130386}
+  m_LocalPosition: {x: -7.91, y: 7.77, z: -0.02}
+  m_LocalScale: {x: 1, y: 1, z: 5.229093}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7037141753506049708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 103.177}
+--- !u!65 &8354997962482651955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518311880289322618}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.222213, y: 3.5538616, z: 1.0617473}
+  m_Center: {x: -2.734701, y: 0.026138203, z: -0.0034771112}
 --- !u!1 &644745187086325930
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +533,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4101510795379422870}
+  - {fileID: 6382422797435576912}
   - {fileID: 566084955645465693}
   - {fileID: 3345970185920472215}
   - {fileID: 3199305254554592454}
@@ -3179,8 +3233,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3886788, y: 20.009855, z: 1.0617476}
-  m_Center: {x: -0.51148826, y: -9.279407, z: -0.0034765531}
+  m_Size: {x: 5.2222137, y: 19.803068, z: 1.0617473}
+  m_Center: {x: -2.4106708, y: -9.552047, z: -0.0034767268}
 --- !u!1 &8819853974318250542
 GameObject:
   m_ObjectHideFlags: 0

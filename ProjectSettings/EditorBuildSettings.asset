@@ -22,7 +22,7 @@ EditorBuildSettings:
     guid: c4f35adabd29e5c44a147e82dbe7f0e6
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/02_NIVEL_NO_EXPONER_EL_CUERPO 2.unity
-    guid: 457a42f2bad67f046917aa6b11bc95d6
+    guid: fc67a5a96ac5fa949aad1830da1380be
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/03_NIVEL_ORGANIZAR.unity
     guid: ba44e8b63b24cbf47b01f2119e25cd7d
@@ -34,7 +34,7 @@ EditorBuildSettings:
     guid: 0fe1d15ba9a1ed8408b53bf3c4cebdd8
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/05_NIVEL_FORMACION 1.unity
-    guid: f17c89b9680f9ef4c9cda7163c5affad
+    guid: a75b7d1a070a6514398afae5c941ea24
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/06_NIVEL_PROSEDIMINETOS.unity
     guid: b1677d86c09e6cb45b8a5c8ede3f87a0
@@ -47,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CREHANA/ESCENAS/09_NIVEL_ACTIVIDADES_RIESGO.unity
     guid: 4f07a8487c499994f95ee5828fba2082
+  - enabled: 1
+    path: Assets/CREHANA/ESCENAS/10_FINAL.unity
+    guid: 7e938f6ee1c90ad4f848c51068fa0f8f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
